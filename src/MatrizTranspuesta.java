@@ -1,10 +1,12 @@
 public class MatrizTranspuesta {
     public static void main(String[] args) {
 
-        int matriz[][] = {{1,2,3},{4,5,6},{7,8,9}};
+        int[][] matriz = {{1,2,3},
+                          {4,5,6},
+                          {7,8,9}};
 
-        ImprimirMatriz(matriz);
-        ImprimirMatriz(trasponerMatriz(matriz,0,0));
+        ImprimirMatriz(matriz,0,0);
+        ImprimirMatriz(trasponerMatriz(matriz,0,0),0,0);
     }
 
     public static int[][] trasponerMatriz(int[][] matriz, int i, int j) {
@@ -23,18 +25,22 @@ public class MatrizTranspuesta {
         }
         return matriztraspuesta;
     }
-    public static void ImprimirMatriz(int[][] matriz) {
-
-        // Recorre cada fila de la matriz
-        for (int i = 0; i < matriz.length; i++) {
-            // Recorre cada columna de la fila
-            for (int j = 0; j < matriz[i].length; j++) {
-                // Imprime el elemento en la posición i, j de la matriz
+    public static int ImprimirMatriz(int[][] matriz, int i , int j) {
+        int c=0;
+        //recorre las filas
+       if(i< matriz.length) {
+           //recorre las columnas
+            if(j< matriz.length) {
+                // cada iteracion se le suma la matriz a la constante
                 System.out.print(matriz[i][j] + " ");
+                c +=ImprimirMatriz(matriz,i,j+1);
+                //
+            }else{
+                j=0;
+                System.out.println();
+                c+= ImprimirMatriz(matriz,i+1,j);
             }
-            // Salta una línea después de imprimir la fila
-            System.out.println();
         }
-
+        return c;
     }
 }
